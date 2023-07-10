@@ -4,7 +4,7 @@
 
 * General
 ** default
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle nil
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -121,7 +121,6 @@
 #+begin_src emacs-lisp
 (after! dired
 (use-package dired
-   ;; :ensure nil
    :commands (dired dired-jump)
    :bind (("C-x C-j" . dired-jump))
    :custom ((dired-listing-switches "-agho --group-directories-first"))))
