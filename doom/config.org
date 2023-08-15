@@ -1,161 +1,286 @@
 #+title: Config
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.config/doom/config.el
+#+OPTIONS: toc:2
 #+auto_tangle: t
 
-* General
-** default
-#+begin_src emacs-lisp :tangle nil
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+* TABLE OF CONTENTS :toc:
+- [[#app-launcher][APP LAUNCHER]]
+  - [[#keybinding-to-launch-a-application][KEYBINDING TO LAUNCH A APPLICATION]]
+  - [[#emacs-as-a-run-launcher][EMACS AS A RUN LAUNCHER]]
+- [[#lsp][LSP]]
+  - [[#clangd][Clangd]]
+  - [[#turning-lsp-features-onoff][TURNING LSP FEATURES ON/OFF]]
+- [[#dired][DIRED]]
+  - [[#dired-single][Dired Single]]
+  - [[#nerd-icons-dired][NERD ICONS DIRED]]
+- [[#doom-modeline][DOOM MODELINE]]
+- [[#media][Media]]
+  - [[#emms-with-mpd][EMMS with mpd]]
+- [[#gneneral-settings][GNENERAL SETTINGS]]
+  - [[#fonts][FONTS]]
+  - [[#line-numbers][LINE NUMBERS]]
+  - [[#nerd-icons][NERD ICONS]]
+  - [[#theme][THEME]]
+  - [[#user-info][USER INFO]]
+- [[#ibuffer][IBUFFER]]
+  - [[#nerd-icons-ibuffer][NERD ICONS IBUFFER]]
+- [[#keymaps][Keymaps]]
+- [[#org-mode][Org Mode]]
+  - [[#directories][Directories]]
+  - [[#org-agenda][Org Agenda]]
+  - [[#org-auto-tangle][Org Auto Tangle]]
+  - [[#ui-tweaks][UI TWEAKS]]
+- [[#rtags][RTAGS]]
+- [[#smartparens][Smartparens]]
+- [[#sudo-utils][SUDO UTILS]]
+- [[#sql][SQL]]
+- [[#treemacs][TREEMACS]]
+  - [[#nerd-icons-treemacs][NERD ICONS TREEMACS]]
+  - [[#setting-the-icons-for-treemacs][SETTING THE ICONS FOR TREEMACS]]
+- [[#treesitter][TREESITTER]]
+- [[#transparency][TRANSPARENCY]]
+- [[#vterm][Vterm]]
+  - [[#make-vterm-popup-on-right][MAKE VTERM POPUP ON RIGHT]]
+- [[#popups][POPUPS]]
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
+* APP LAUNCHER
 
+** KEYBINDING TO LAUNCH A APPLICATION
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-;;(setq user-full-name "John Doe"
-;;      user-mail-address "john@doe.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;;(setq doom-theme 'doom-one)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-;;(setq display-line-numbers-type t)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-;;(setq org-directory "~/org/")
-
-
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+#+begin_src emacs-lisp
+(map! :leader
+      :prefix "y"
+      :desc "app launcher"      "a" #'app-launcher-run-app)
 
 #+end_src
-*** User Info
+
+** EMACS AS A RUN LAUNCHER
+
+#+begin_src emacs-lisp :tangle no
+(defun emacs-run-launcher ()
+  "Create and select a frame called emacs-run-launcher which consists only of a minibuffer and has specific dimensions. Runs app-launcher-run-app on that frame, which is an emacs command that prompts you to select an app and open it in a dmenu like behaviour. Delete the frame after that command has exited"
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-run-launcher")
+                    (minibuffer . only)
+                    (fullscreen . 0) ; no fullscreen
+                    (undecorated . t) ; remove title bar
+                    ;;(auto-raise . t) ; focus on this frame
+                    ;;(tool-bar-lines . 0)
+                    ;;(menu-bar-lines . 0)
+                    (internal-border-width . 10)
+                    (width . 80)
+                    (height . 11)
+                    (visibility . t)
+                    (left . .5)
+                    (top . .5)))
+    (unwind-protect
+        (app-launcher-run-app)
+      (delete-frame))))
+#+end_src
+
+* LSP
+** Clangd
+*** LSP MODE CONFIGURATION
+#+begin_src emacs-lisp
+(setq lsp-clients-clangd-args '("-j=3"
+                                "--background-index"
+                                "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--header-insertion=never"
+                                "--header-insertion-decorators=0"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+
+#+end_src
+
+*** Eglot with clangd
+#+begin_src emacs-lisp :tangle no
+(set-eglot-client! 'cc-mode '("clangd" "-j=3" "--clang-tidy"))
+#+end_src
+
+** TURNING LSP FEATURES ON/OFF
+#+begin_src emacs-lisp
+(setq lsp-enable-links nil)
+(setq lsp-enable-symbol-highlighting nil)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-ui-sideline-enable nil)
+(setq lsp-modeline-code-actions-enable nil)
+(setq lsp-signature-auto-activate nil) ;; you could manually request them via `lsp-signature-activate`
+(setq lsp-signature-render-documentation nil)
+
+#+end_src
+
+* DIRED
+#+begin_src emacs-lisp
+(after! dired
+  (use-package! dired
+    :commands (dired dired-jump)
+    :bind (("C-x C-j" . dired-jump))
+    :custom ((dired-listing-switches "-agho --group-directories-first"))))
+
+(map! :map dired-mode-map
+      :gnv "h" 'dired-single-up-directory
+      :gnv "l" 'dired-single-buffer)
+
+#+end_src
+
+** Dired Single
+#+begin_src emacs-lisp
+(use-package! dired-single)
+
+#+end_src
+
+** NERD ICONS DIRED
+
+Use nerd icons for displaying icons in dired buffer instead of all the icons.
+
+#+begin_src emacs-lisp :tangle no
+(after! dired
+  (after! nerd-icons
+    (use-package! nerd-icons-dired
+      :hook (dired-mode . nerd-icons-dired-mode))))
+
+#+end_src
+
+* DOOM MODELINE
+#+begin_src emacs-lisp :tangle no
+#+end_src
+
+* Media
+Why bother with an external media manager when emacs is a thing.
+EMMS is huge, incredibly powerful and luckily well documented.
+All I need it for is to play music and video, that's it.
+I also need it to display metadata on the modeline correctly, which it does with mpd automatically.
+
+** EMMS with mpd
+There is many backends, many players and codecs for EMMS, we use mpd now.
+
+*** Basic setup for mpd
+#+BEGIN_SRC emacs-lisp
+(after! emms
+  (use-package! emms
+    :config
+    (require 'emms-setup)
+    (require 'emms-player-mpd)
+    (emms-all) ; don't change this to values you see on stackoverflow questions if you expect emms to work
+    (setq emms-seek-seconds 5)
+    (setq emms-player-list '(emms-player-mpd))
+    (setq emms-info-functions '(emms-info-mpd))
+    (setq emms-player-mpd-music-directory "~/Music/")
+    (setq emms-player-mpd-server-name "localhost")
+    (setq emms-player-mpd-server-port "6601")
+    (setq emms-source-file-default-directory "/home/yogesh/Music")))
+
+(map! :after emms
+      :leader
+      (:prefix "y"
+               (:prefix ("e" . "music")
+                :desc "Emms"     "o"         #'emms
+                :desc "Mpd start" "s"        #'+emms/mpd-start-music-daemon
+                :desc "Mpd kill" "k"         #'+emms/mpd-kill-music-daemon
+                :desc "Mpd next" "n"         #'emms-player-mpd-next
+                :desc "Mpd previous" "p"     #'emms-player-mpd-previous
+                :desc "Mpd play" "j"         #'emms-player-mpd-play
+                :desc "Mpd stop" "l"         #'emms-player-mpd-stop
+                :desc "Mpd connect" "c"      #'emms-player-mpd-connect
+                :desc "Mpd disconnect" "d"   #'emms-player-mpd-disconnect)))
+
+    #+END_SRC
+
+*** MPC Setup
+**** Setting the default port
+We use non-default settings for the socket, to use the built in =mpc= functionality we need to set up a variable.
+Adjust according to your setup.
+#+BEGIN_SRC emacs-lisp
+(setq mpc-host "localhost:6601")
+
+#+END_SRC
+
+* GNENERAL SETTINGS
+** FONTS
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 24))
+
+#+end_src
+
+** LINE NUMBERS
+#+Begin_src emacs-lisp
+(setq display-line-numbers-type t)
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook
+                compilation-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+#+end_src
+
+** NERD ICONS
+#+begin_src emacs-lisp :tangle no
+(use-package! nerd-icons
+  :custom
+  (nerd-icons-font-family "Symbols Nerd Font Mono"))
+
+#+end_src
+
+** THEME
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-one)
+
+#+end_src
+
+** USER INFO
 #+begin_src emacs-lisp
 (setq user-full-name "Yogesh Rathod"
       user-mail-address "yogesh952003@gmail.com")
 
 #+end_src
 
-*** fonts
-#+begin_src emacs-lisp
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 24))
-(setq doom-unicode-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15))
-
-#+end_src
-
-*** Line Numbers
-#+begin_src emacs-lisp
-(setq display-line-numbers-type t)
-(dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  shell-mode-hook
-                  eshell-mode-hook
-                  compilation-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-#+end_src
-
-*** Doom
-#+begin_src emacs-lisp
-(setq doom-theme 'doom-one)
-
-#+end_src
-
-* Dired
-#+begin_src emacs-lisp
-(after! dired
-(use-package dired
-   :commands (dired dired-jump)
-   :bind (("C-x C-j" . dired-jump))
-   :custom ((dired-listing-switches "-agho --group-directories-first"))))
-
-(map! :map dired-mode-map
-           :gnv "h" 'dired-single-up-directory
-           :gnv "l" 'dired-single-buffer)
-
-#+end_src
-
-** Dired Single
-#+begin_src emacs-lisp
-(use-package dired-single)
-
-#+end_src
-
-** Dired hided dotfiles
-#+begin_src emacs-lisp
-(use-package dired-hide-dotfiles
-  :hook (dired-mode . dired-hide-dotfiles-mode)
+* IBUFFER
+** NERD ICONS IBUFFER
+#+begin_src emacs-lisp :tangle no
+(use-package! nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  ;; Whether display the icons.
   :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
+  (setq nerd-icons-ibuffer-icon t)
+
+  ;; Whether display the colorful icons.
+  ;; It respects `nerd-icons-color-icons'.
+  (setq nerd-icons-ibuffer-color-icon t)
+
+  ;; The default icon size in ibuffer.
+  (setq nerd-icons-ibuffer-icon-size 1.0)
+
+  ;; Use human readable file size in ibuffer.
+  (setq  nerd-icons-ibuffer-human-readable-size t)
+
+  ;; A list of ways to display buffer lines with `nerd-icons'.
+  ;; See `ibuffer-formats' for details.
+  nerd-icons-ibuffer-formats
+
+  ;; Slow Rendering
+  ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+  ;; you can try setting the following variable
+  ;;(setq inhibit-compacting-font-caches t)
+  )
 
 #+end_src
 
-* Smartparens
-** Remove auto bracket(<) insertion in cpp mode
+* Keymaps
 #+begin_src emacs-lisp
-(after! smartparens
-  (after! cc-mode
-    (sp-local-pair '(c++-mode objc-mode) "<" nil :actions :rem)))
+;; Treemacs Keymap
+(map! :leader
+      (:prefix ("y" . "Custom Keymaps")
+       :desc "Display current project in treemacs"
+       :mode 'prog-mode
+       :n
+       "t" #'treemacs-add-and-display-current-project-exclusively))
 
 #+end_src
-
 * Org Mode
 ** Directories
 #+begin_src emacs-lisp
@@ -164,36 +289,23 @@
 
 #+end_src
 
-** Miscellenious
-#+begin_src emacs-lisp
-(setq org-hide-emphasis-markers t)
-(defun yogesh/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-#+end_src
-
-** Visual fill column
-#+begin_src emacs-lisp
-(use-package visual-fill-column
-  :hook (org-mode . yogesh/org-mode-visual-fill))
-
-#+end_src
-
 ** Org Agenda
 #+begin_src emacs-lisp
 (setq org-agenda-files
-      '("~/Dev/Org/"))
+      '("~/Dev/Org/agenda/"))
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
+(setq calendar-week-start-day 1)
 
 #+end_src
 
 ** Org Auto Tangle
+
+If the property '*#+auto_tangle*' is set to '*t*' in and org file then, all the source code blocks in it will be tangled automatically on save.
+
 #+begin_src emacs-lisp
-(use-package org-auto-tangle
+(use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
@@ -201,9 +313,125 @@
 
 #+end_src
 
+** UI TWEAKS
+#+begin_src emacs-lisp
+(after! org
+  (setq org-hide-emphasis-markers t))
+
+#+end_src
+
+* RTAGS
+#+begin_src emacs-lisp :tangle no
+(setq 'rtags-path "/home/yogesh/Downloads/rtags/bin")
+
+#+end_src
+
+* Smartparens
+
+Smartparens by default when adding a opening angular bracket ('<') in cpp mode, also inserts the closing angular bracket('>'). This is quite annoying, so the below snippet turn's this off.
+
+#+begin_src emacs-lisp
+(after! smartparens
+  (after! cc-mode
+    (sp-local-pair '(c++-mode objc-mode) "<" nil :actions :rem)))
+
+#+end_src
+
+* SUDO UTILS
+#+begin_src emacs-lisp
+(use-package! sudo-utils)
+
+#+end_src
+
+* SQL
+#+begin_src emacs-lisp
+
+(set-popup-rule! "*SQL: MySQL*" :size 0.5 :select nil :quit nil :ttl 0)
+
+#+end_src
+
+* TREEMACS
+
+NerdTree like project drawer for emacs.
+
+** NERD ICONS TREEMACS
+
+#+begin_src emacs-lisp :tangle no
+(use-package! treemacs-nerd-icons
+  :config
+  (treemacs-load-theme "nerd-icons"))
+
+#+end_src
+
+** SETTING THE ICONS FOR TREEMACS
+#+begin_src emacs-lisp
+(setq doom-themes-treemacs-theme "doom-colors")
+
+#+end_src
+
+* TREESITTER
+#+begin_src emacs-lisp
+(setq +tree-sitter-hl-enabled-modes t)
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+     (c "https://github.com/tree-sitter/tree-sitter-c")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (rust "https://github.com/tree-sitter/tree-sitter-rust")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+#+end_src
+
+* TRANSPARENCY
+with emacs 29.1 we can make the frame transparent.
+
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+
+#+end_src
+
 * Vterm
+
+When is Vterm buffer, anything typed after pressing the keybinding "C-q" will be sent directly to the vterm.
+
 #+begin_src emacs-lisp
 (map! :map vterm-mode-map
            :gnv "C-q" 'vterm-send-next-key)
 
+#+end_src
+
+** MAKE VTERM POPUP ON RIGHT
+#+begin_src emacs-lisp :tangle no
+(after! vterm
+  (set-popup-rule! "*doom:vterm-popup:*" :size 0.25 :vslot -4 :select t :quit nil :ttl 0 :side 'right))
+
+#+end_src
+
+* POPUPS
+some keybinding to manage popup
+
+#+begin_src emacs-lisp
+  (map! :after popup
+        :leader
+        (:prefix "y"
+                 (:prefix ("p" . "Popup")
+                  :desc "Make popup" "m"     #'+popup/buffer
+                  :desc "Toggle popup" "t"   #'+popup/toggle
+                  :desc "Restore popup" "r"  #'+popup/restore)))
 #+end_src
