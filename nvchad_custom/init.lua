@@ -8,3 +8,4 @@
 
 vim.opt.relativenumber = true
 vim.opt.whichwrap = "<>[]"
+vim.opt.foldlevelstart = 99
