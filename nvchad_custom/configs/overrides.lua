@@ -85,7 +85,7 @@ M.nvimtree = {
 M.persistence = {}
 M.indentblankline = {
 	indent = {
-		char = "┆",
+		char = "│",
 		smart_indent_cap = true,
 	},
 	exclude = {
@@ -101,7 +101,11 @@ M.indentblankline = {
 			"",
 		},
 	},
+	whitespace = {
+		highlight = { "Whitespace" },
+	},
 	scope = {
+		highlight = { "Function" },
 		exclude = {},
 		show_start = false,
 		show_end = false,
