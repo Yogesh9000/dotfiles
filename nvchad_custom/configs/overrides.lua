@@ -98,6 +98,7 @@ M.indentblankline = {
 			"TelescopePrompt",
 			"TelescopeResults",
 			"mason",
+			"norg",
 			"",
 		},
 	},

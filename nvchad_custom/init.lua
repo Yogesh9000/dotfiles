@@ -9,3 +9,5 @@
 vim.opt.relativenumber = true
 vim.opt.whichwrap = "<>[]"
 vim.opt.foldlevelstart = 99
+vim.opt.linebreak = true
+vim.opt.breakindent = true
