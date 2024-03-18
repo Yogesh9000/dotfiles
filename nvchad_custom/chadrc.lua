@@ -5,14 +5,15 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "solarized_dark",
-	theme_toggle = { "solarized_dark", "solarized_dark" },
+	theme = "kanagawa",
+	theme_toggle = { "kanagawa", "kanagawa" },
 	transparency = true,
 	cmp = {
 		style = "default",
 	},
 	statusline = {
-		theme = "vscode_colored",
+		theme = "default",
+		separator_style = "round",
 	},
 
 	hl_override = highlights.override,

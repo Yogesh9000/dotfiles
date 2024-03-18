@@ -11,3 +11,4 @@ vim.opt.whichwrap = "<>[]"
 vim.opt.foldlevelstart = 99
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+vim.cmd([[let g:rust_recommended_style = v:false]])

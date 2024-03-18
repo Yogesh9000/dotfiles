@@ -12,6 +12,7 @@ local options = {
 		hpp = { "clang_format" },
 		sh = { "shfmt" },
 		python = { "black" },
+		rust = { "rustfmt" },
 	},
 
 	-- adding same formatter for multiple filetypes can look too much work for some
