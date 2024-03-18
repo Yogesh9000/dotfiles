@@ -61,6 +61,12 @@ M.mason = {
 
 -- git support in nvimtree
 M.nvimtree = {
+	actions = {
+		change_dir = {
+			enable = true,
+			global = true,
+		},
+	},
 	git = {
 		enable = true,
 		ignore = false,
@@ -74,8 +80,8 @@ M.nvimtree = {
 			},
 			glyphs = {
 				folder = {
-					default = "",
-					open = "",
+					-- default = "",
+					-- open = "",
 				},
 				git = {
 					ignored = "",
