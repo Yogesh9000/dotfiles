@@ -62,5 +62,9 @@ end)
 -- man pages mappings
 map("n", "<C-k>", "K", { noremap = true })
 
+-- tabufline mappings
+map("n", "<leader>tm", '<cmd>lua require("nvchad.tabufline").move_buf(1)<cr>', { desc = "move buffer right" })
+map("n", "<leader>tM", '<cmd>lua require("nvchad.tabufline").move_buf(-1)<cr>', { desc = "move buffer left" })
+
 -- deleted mappings
 nomap("n", "<leader>n")
