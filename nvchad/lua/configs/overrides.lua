@@ -123,6 +123,9 @@ M.indentblankline = {
 }
 
 M.telescope = {
+	defaults = {
+		file_ignore_patterns = { ".clangd" },
+	},
 	extensions_list = { "themes", "terms", "fzf" },
 }
 

@@ -9,6 +9,7 @@ local options = {
 		c = { "clang_format" },
 		cpp = { "clang_format" },
 		h = { "clang_format" },
+		cmake = { "gersemi", "cmake_format" },
 		hpp = { "clang_format" },
 		sh = { "shfmt" },
 		python = { "black" },

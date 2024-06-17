@@ -12,6 +12,8 @@ map("n", "k", "gk", { noremap = true })
 map("n", "gj", "j", { noremap = true })
 map("n", "gk", "k", { noremap = true })
 map("n", "<leader>X", "<cmd>bdelete<cr>", { silent = true, desc = "buffer delete" })
+map("n", "+","<C-a>", { silent = true, desc = "buffer delete" })
+map("n", "-","<C-x>", { silent = true, desc = "buffer delete" })
 
 -- split management and movement mappings
 map("n", "ss", "<cmd>split<cr>", { desc = "split horizontal" })
@@ -58,6 +60,21 @@ map("n", "<leader>nr", "<cmd>Neorg return<cr>", { desc = "neorg return" })
 map({ "n", "t" }, "<A-v>", function()
 	require("nvchad.term").toggle({ pos = "vsp", size = 0.5, id = "floo" })
 end)
+-- map("n", "<leader>rr", function()
+-- 	require("nvchad.term").toggle({
+-- 		pos = "float",
+-- 		cmd = function()
+-- 			local file = vim.fn.expand("%")
+-- 			local ft_cmds = {
+-- 				cpp = "cmake --build build && ./build/" .. file:gsub("%.cpp", ""),
+-- 				python = "python " .. file,
+-- 			}
+-- 			return ft_cmds[vim.bo.ft]
+-- 		end,
+-- 		id = "cmake",
+-- 		clear_cmd = true,
+-- 	})
+-- end)
 
 -- man pages mappings
 map("n", "<C-k>", "K", { noremap = true })
@@ -65,6 +82,13 @@ map("n", "<C-k>", "K", { noremap = true })
 -- tabufline mappings
 map("n", "<leader>tm", '<cmd>lua require("nvchad.tabufline").move_buf(1)<cr>', { desc = "move buffer right" })
 map("n", "<leader>tM", '<cmd>lua require("nvchad.tabufline").move_buf(-1)<cr>', { desc = "move buffer left" })
+
+-- lsp mappings
+map("n", "<C-h>", "<cmd>ClangdSwitchSourceHeader<cr>", { desc = "switch header" })
+
+-- telescope mappings
+map("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
+nomap("n", "<leader>fz")
 
 -- deleted mappings
 nomap("n", "<leader>n")

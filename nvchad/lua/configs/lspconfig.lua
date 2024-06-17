@@ -6,7 +6,17 @@ local on_init = configs.on_init
 local lspconfig = require("lspconfig")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "rust_analyzer", "lua_ls" }
+local servers = {
+	"html",
+	"cssls",
+	"tsserver",
+	"clangd",
+	"pyright",
+	"rust_analyzer",
+	"lua_ls",
+	"omnisharp",
+	"cmake",
+}
 
 -- command to launch language server
 local commands = {}
@@ -14,6 +24,11 @@ commands.clangd = {
 	"clangd",
 	"--completion-style=detailed",
 	"--header-insertion=never",
+}
+
+commands.omnisharp = {
+	"dotnet",
+	"/home/yogesh/.omnisharp/OmniSharp.dll",
 }
 
 for _, lsp in ipairs(servers) do
