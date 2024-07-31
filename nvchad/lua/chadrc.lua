@@ -6,6 +6,9 @@ M.ui = {
 	statusline = {
 		separator_style = "round",
 	},
+    cmp = {
+        style = "atom-colored"
+    }
 }
 
 return M
