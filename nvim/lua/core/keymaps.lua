@@ -3,6 +3,7 @@ local del = vim.keymap.del
 
 map("n", ";", ":")
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
+map("i", "jk", "<Esc>", { desc = "Normal mode"})
 
 map("n", "ss", "<cmd>split<CR>", {desc = "horizontal split"})
 map("n", "sv", "<cmd>vsplit<CR>", {desc = "vertical split"})
