@@ -18,6 +18,7 @@ local handlers = {
 return {
   "neovim/nvim-lspconfig",
   opts = {
+    inlay_hints = { enabled = false },
     -- Enable lsp cursor word highlighting
     document_highlight = {
       enabled = false,
