@@ -1,0 +1,11 @@
+[init]
+	defaultBranch = main
+[user]
+	email = yogesh952003@gmail.com
+	name = Yogesh Rathod
+[core]
+	editor = nvim
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
