@@ -1,4 +1,4 @@
-# Language: Cpp
+# Language: Cppclangclang
 # BasedOnStyle: Google
 # AccessModifierOffset: -2
 # AllowShortFunctionsOnASingleLine: Empty
@@ -19,7 +19,7 @@ AlignTrailingComments: false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: All
+AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
 AlwaysBreakAfterDefinitionReturnType: None

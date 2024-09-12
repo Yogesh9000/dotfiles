@@ -6,12 +6,16 @@ Checks: "*,
         -fuchsia-*,
         -google-*,
         -llvm*,
-        -cppcoreguidelines-*,
         -modernize-use-trailing-return-type,
         -zircon-*,
         -readability-else-after-return,
         -readability-static-accessed-through-instance,
         -readability-avoid-const-params-in-decls,
+        -readability-magic-numbers,
+        -readability-implicit-bool-conversion,
+        -bugprone-easily-swappable-parameters,
+        -cppcoreguidelines-*,
+        -cppcoreguidelines-avoid-magic-numbers
         -misc-non-private-member-variables-in-classes,
 "
 WarningsAsErrors: ''
