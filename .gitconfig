@@ -5,6 +5,7 @@
 	name = Yogesh Rathod
 [core]
 	editor = nvim
+  excludesFile = ~/.localExcludesFile
 [push]
 	autoSetupRemote = true
 [pull]

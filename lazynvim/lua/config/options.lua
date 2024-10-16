@@ -3,3 +3,4 @@ vim.opt.listchars = {
   trail = " ",
   nbsp = "+",
 }
+vim.g.asmsyntax = "nasm"
