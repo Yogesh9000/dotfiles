@@ -3,5 +3,5 @@ Hover:
 Diagnostics:
   UnusedIncludes: Strict
 CompileFlags:
-  Add: [ -D__cpp_concepts=202002L, -Wno-unknown-warning-option]
+  Add: -Wno-unknown-warning-option
   Remove: [-m*, -f*]
