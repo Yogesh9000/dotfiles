@@ -22,3 +22,27 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = false
   end,
 })
+
+-- wrap git commit messages to 72 characters
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit" },
+  callback = function()
+    vim.bo.textwidth = 72
+  end,
+  desc = "limit git commit messages to 72 charaters",
+})
+
+-- Disable autoformat for cpp, c, hpp, h files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "cpp", "c", "hpp", "h" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.ebnf" },
+  callback = function()
+    vim.bo.filetype = "ebnf"
+  end,
+})

@@ -4,9 +4,11 @@
 	email = yogesh952003@gmail.com
 	name = Yogesh Rathod
 [core]
-	editor = nvim
+	editor = NVIM_APPNAME=lazynvim nvim
   excludesFile = ~/.localExcludesFile
 [push]
 	autoSetupRemote = true
 [pull]
 	rebase = true
+[color]
+	ui = auto

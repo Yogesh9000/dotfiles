@@ -7,7 +7,7 @@ return {
       "tailwindcss-language-server",
       "lua-language-server",
       "emmet-ls",
-      "clangd",
+      -- "clangd",
       "clang-format",
       "pyright",
       -- "typescript-language-server ",

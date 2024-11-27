@@ -4,6 +4,7 @@
 # AllowShortFunctionsOnASingleLine: Empty
 # AlignAfterOpenBracket: Align
 # PackConstructorInitializers: BinPack
+PackConstructorInitializersStyle: BinPack
 # PointerAlignment: Right 
 # ReferenceAlignment: Right 
 
@@ -15,9 +16,10 @@ AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Left
 AlignOperands: true
-AlignTrailingComments: false
+AlignTrailingComments: Leave
+AlignArrayOfStructures: Right
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: true
@@ -30,15 +32,15 @@ BinPackArguments: false
 BinPackParameters: false
 BraceWrapping:
   AfterClass: true
-  AfterControlStatement: false
-  AfterEnum: false
+  AfterControlStatement: true
+  AfterEnum: true
   AfterFunction: true
-  AfterNamespace: false
+  AfterNamespace: true
   AfterObjCDeclaration: false
   AfterStruct: true
-  AfterUnion: false
-  BeforeCatch: false
-  BeforeElse: false
+  AfterUnion: true
+  BeforeCatch: true
+  BeforeElse: true
   IndentBraces: false
   SplitEmptyFunction: false
   SplitEmptyNamespace: true
@@ -84,7 +86,7 @@ Language: Cpp
 MacroBlockBegin: ''
 MacroBlockEnd: ''
 MaxEmptyLinesToKeep: 2
-NamespaceIndentation: Inner
+NamespaceIndentation: All
 ObjCBlockIndentWidth: 7
 ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: false

@@ -40,6 +40,7 @@ return {
         handlers = handlers,
       },
       clangd = {
+        mason = false,
         handlers = handlers,
       },
       pyright = {
