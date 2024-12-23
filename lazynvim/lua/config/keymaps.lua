@@ -8,7 +8,10 @@ map("n", ";", ":", { desc = "Commandline" })
 map("i", "<C-BS>", "<C-W>", { desc = "delete previous word" })
 
 -- Snacks Terminal
+map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 map("n", "<A-v>", function()
   Snacks.terminal()
 end, { desc = "Terminal (cwd)" })
-map("t", "<A-v>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<A-v>", function()
+  Snacks.terminal()
+end, { desc = "Hide Teminal" })
