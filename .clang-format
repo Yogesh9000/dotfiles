@@ -4,7 +4,7 @@
 # AllowShortFunctionsOnASingleLine: Empty
 # AlignAfterOpenBracket: Align
 # PackConstructorInitializers: BinPack
-PackConstructorInitializersStyle: BinPack
+# PackConstructorInitializersStyle: BinPack
 # PointerAlignment: Right 
 # ReferenceAlignment: Right 
 
