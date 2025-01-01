@@ -42,6 +42,13 @@ return {
       clangd = {
         mason = false,
         handlers = handlers,
+        root_dir = function()
+          local lsp = require("lspconfig")
+          return vim.fn.fnamemodify(
+            lsp.util.root_pattern(".git", "build", ".cache", "CMakeLists.txt", "MakeFile", "compile_commands.json")(),
+            ":p"
+          )
+        end,
       },
       pyright = {
         handlers = handlers,
