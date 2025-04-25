@@ -22,6 +22,8 @@ Checks: "*,
         -cppcoreguidelines-*,
         -cppcoreguidelines-avoid-magic-numbers,
         -misc-non-private-member-variables-in-classes,
+        -boost-use-ranges,
+        -modernize-use-ranges,
 "
 WarningsAsErrors: ''
 HeaderFilterRegex: ''

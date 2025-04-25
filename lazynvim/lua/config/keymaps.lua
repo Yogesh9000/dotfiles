@@ -5,7 +5,9 @@ map("n", ";", ":", { desc = "Commandline" })
 -- map("i", "jk", "<Esc>", { desc = "Normal mode" })
 -- map("n", "<leader>bd", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 
-map("i", "<C-H>", "<C-W>", { desc = "delete previous word" })
+-- some terminal emulators send C-BS as C-H so need to define terminal emulator specific bindings
+map("i", "<C-H>", "<C-W>", { desc = "delete previous word" }) -- alacrityy
+-- map("i", "<C-BS>", "<C-W>", { desc = "delete previous word" }) -- kitty
 
 -- Snacks Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })

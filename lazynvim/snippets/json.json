@@ -1,0 +1,18 @@
+{
+  "add new snippet" :
+  {
+    "prefix" : "snip",
+    "description" : "Add new snippet",
+    "body" : [
+      "\"$1\" :",
+      "{",
+      "  \"prefix\" : \"$2\",",
+      "  \"desciption\" : \"$1\",",
+      "  \"body\" :",
+      "  [",
+      "    $3",
+      "  ]",
+      "}"
+    ]
+  }
+}

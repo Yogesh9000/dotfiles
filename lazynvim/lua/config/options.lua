@@ -4,3 +4,6 @@ vim.opt.listchars = {
   nbsp = "+",
 }
 vim.g.asmsyntax = "gas"
+vim.cmd([[
+set cinoptions=l1
+]])
