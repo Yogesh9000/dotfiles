@@ -16,6 +16,7 @@ Checks: "*,
         -readability-redundant-access-specifiers,
         -readability-braces-around-statements,
         -readability-misleading-indentation,
+        -readability-redundant-member-init,
         -readability-identifier-length,
         -hicpp-braces-around-statements,
         -bugprone-easily-swappable-parameters,
@@ -24,6 +25,7 @@ Checks: "*,
         -misc-non-private-member-variables-in-classes,
         -boost-use-ranges,
         -modernize-use-ranges,
+        -modernize-use-default-member-init
 "
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
