@@ -23,6 +23,7 @@ Checks: "*,
         -cppcoreguidelines-*,
         -cppcoreguidelines-avoid-magic-numbers,
         -misc-non-private-member-variables-in-classes,
+        -misc-use-anonymous-namespace,
         -boost-use-ranges,
         -modernize-use-ranges,
         -modernize-use-default-member-init
