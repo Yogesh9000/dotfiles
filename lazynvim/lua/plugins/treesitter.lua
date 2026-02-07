@@ -25,12 +25,7 @@ return {
     },
     indent = {
       enable = true,
-      disable = function()
-        if vim.bo.filetype == "cpp" or vim.bo.filetype == "c" then
-          return true
-        end
-        return false
-      end,
+      disable = { "cpp", "c" },
     },
   },
 }

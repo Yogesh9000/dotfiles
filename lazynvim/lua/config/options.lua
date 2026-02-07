@@ -4,7 +4,4 @@ vim.opt.listchars = {
   nbsp = "+",
 }
 vim.g.asmsyntax = "gas"
-vim.cmd([[
-set cinoptions=l1
-]])
-vim.opt.cinoptions:append("g0")
+vim.opt.cinoptions:append({ "l1", "g0" })
