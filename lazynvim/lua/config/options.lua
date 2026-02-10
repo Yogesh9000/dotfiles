@@ -5,3 +5,4 @@ vim.opt.listchars = {
 }
 vim.g.asmsyntax = "gas"
 vim.opt.cinoptions:append({ "l1", "g0" })
+vim.o.relativenumber = false
