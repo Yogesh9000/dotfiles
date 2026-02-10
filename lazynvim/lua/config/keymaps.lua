@@ -12,8 +12,8 @@ map("i", "<C-H>", "<C-W>", { desc = "delete previous word" }) -- alacrityy
 -- Snacks Terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 map("n", "<A-v>", function()
-  Snacks.terminal(nil, { win = { position = "left" }})
+  Snacks.terminal(nil, { win = { position = "right" } })
 end, { desc = "Terminal (cwd)" })
 map("t", "<A-v>", function()
-  Snacks.terminal(nil, { win = { position = "left" }})
+  Snacks.terminal(nil, { win = { position = "right" } })
 end, { desc = "Hide Teminal" })
