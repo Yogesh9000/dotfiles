@@ -1,0 +1,17 @@
+[env]
+
+[terminal]
+shell = { program = "pwsh", args = ["-NoLogo"] }
+
+[font]
+normal = {family = "JetBrainsMono Nerd Font", style = "Regular"}
+size = 12.5
+
+[keyboard]
+bindings = [
+  { key = "F11", action = "ToggleFullscreen" },
+  { key = "t", mods = "Control | Shift", action = "CreateNewWindow"}
+]
+
+[window]
+startup_mode = "Maximized"
