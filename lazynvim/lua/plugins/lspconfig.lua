@@ -19,6 +19,17 @@ return {
       opts.border = opts.border or border
       return orig_open_floating_preview(contents, syntax, opts, ...)
     end
+
+    -- C/C++: switch between source (.c/.cpp) and header (.h/.hpp) via clangd.
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+      callback = function(ev)
+        vim.keymap.set("n", "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", {
+          buffer = ev.buf,
+          desc = "Switch Source/Header (clangd)",
+        })
+      end,
+    })
   end,
   opts = {
     inlay_hints = { enabled = false },
